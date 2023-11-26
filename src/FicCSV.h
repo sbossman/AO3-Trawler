@@ -36,6 +36,9 @@ public:
 
     std::map<std::string, std::vector<std::pair<std::string, std::string>>> getAdjList();
     void printAdjList();
+
+    std::vector<std::pair<std::string, std::string>> pathBtwnPoints1(std::string from, std::string to);
+    void printPath(std::string from, std::string to);
 };
 
 

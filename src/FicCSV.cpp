@@ -151,3 +151,41 @@ void FicCSV::printAdjList() {
         }
     }
 }
+
+std::vector<std::pair<std::string, std::string>> FicCSV::pathBtwnPoints1(std::string from, std::string to){
+    int fromId = -1;
+    int toId = -1;
+
+    auto iter = ficTitles.begin();
+    for(; iter != ficTitles.end(); iter++){
+        if(iter->second == from)
+            fromId = iter->first;
+        if(iter->second == to)
+            toId = iter->first;
+    }
+    if(fromId == -1) {
+        std::cout << "COULD NOT FIND FROM STRING" << std::endl;
+        return {};
+    }
+    if(toId == -1){
+        std::cout << "COULD NOT FIND TO STRING" << std::endl;
+        return {};
+    }
+
+    auto pathIds = Graph::pathBtwnPoints1(fromId, toId);
+    std::vector<std::pair<std::string, std::string>> path = {};
+    for(int i = 0; i < pathIds.size(); i++){
+        std::pair<int, int> curr = pathIds[i];
+        std::string title = ficTitles[curr.first];
+        std::string tag = tags[curr.second];
+        path.push_back({title, tag});
+    }
+    return path;
+
+}
+void FicCSV::printPath(std::string from, std::string to){
+    auto path = pathBtwnPoints1(from, to);
+    for(int i = 0; i < path.size(); i++){
+        std::cout << path[i].second << " --> " << path[i].first << std::endl;
+    }
+}

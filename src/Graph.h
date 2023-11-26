@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <vector>
-#include <set>
+#include <unordered_set>
 #include <queue>
 #include <algorithm>
 #include <iostream>
@@ -14,6 +14,25 @@
 #ifndef AO3_TRAWLER_GRAPH_H
 #define AO3_TRAWLER_GRAPH_H
 
+struct Path{
+    int from;
+    int curr;
+    std::vector<std::pair<int, int>> path;
+    // how we got to curr| node|tag
+
+    Path(int from){
+        this->from = from;
+        curr = from;
+        path = {};
+    }
+
+    Path(Path prev, int curr, int tag){
+        from = prev.from;
+        this->curr = curr;
+        path = prev.path;
+        path.push_back({curr, tag});
+    }
+};
 
 class Graph {
 private:
@@ -21,9 +40,9 @@ private:
     int e; // number of edges
 
 protected:
-    std::map<int, std::vector<std::pair<int, int>>> theList;
+    std::unordered_map<int, std::vector<std::pair<int, int>>> theList;
     //       work     connected works    id   tag
-    std::map<int, int> outDegree;
+    std::unordered_map<int, int> outDegree;
     // the int contains the outdegree for a given id
 
 public:
@@ -36,6 +55,9 @@ public:
 
     std::vector<int> getNodes();
     void printNodes();
+
+    // returns path between two points
+    std::vector<std::pair<int, int>> pathBtwnPoints1(int from, int to);
 
     // TO DO: include way to find quickest route btwn two fics
 };

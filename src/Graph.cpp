@@ -39,8 +39,8 @@ void Graph::insertEdge(int to, int from, int tag) {
 
 std::vector<int> Graph::bfs(){
     auto iter = theList.begin();
-    std::vector<int> vertices; // ngl figuring wtf this is might take a sec
-    std::set<int> visited;
+    std::vector<int> vertices;
+    std::unordered_set<int> visited;
     std::vector<int> vertexQueue;
 
     while(visited.size() != theList.size()){
@@ -55,7 +55,7 @@ std::vector<int> Graph::bfs(){
         while(!vertexQueue.empty()){
             int front = vertexQueue[0];
             vertices.push_back(front);
-            visited.insert(front);
+            // visited.insert(front);
 
             std::vector<std::pair<int, int>> connected = theList[front];
 
@@ -64,12 +64,12 @@ std::vector<int> Graph::bfs(){
                 int val = connected[i].first;
                 // std::cout << "VAL: " << val << std::endl;
 
-                bool inQueue = std::find(vertexQueue.begin(), vertexQueue.end(), val) != vertexQueue.end();
-                bool inVisited = std::find(visited.begin(), visited.end(), val) != visited.end();
+                bool inVisited = visited.find(val) != visited.end();
 
                 // std::cout << "IN QUEUE: " << inQueue << "\t IN VISITED: " << inVisited << std::endl;
-                if(!inVisited && !inQueue){ // if not in queue
+                if(!inVisited){ // if not in queue
                     vertexQueue.push_back(val);
+                    visited.insert(val);
                 }
             }
             vertexQueue.erase(vertexQueue.begin());
@@ -105,4 +105,45 @@ void Graph::printNodes() {
     for(int i = 0; i < nodes.size(); i++){
         std::cout << nodes[i] << std::endl;
     }
+}
+
+std::vector<std::pair<int, int>> Graph::pathBtwnPoints1(int from, int to) {
+    /*
+     * FINDING PATH BETWEEN TWO POINTS USING BFS
+     * 1. Do BFS like usual
+     * 2. Except now each point added to the vector has a fun little
+     *    thing basically tracking the path it got there through
+     * 3. Return that path
+     */
+    std::unordered_set<int> visited;
+    std::vector<Path> pathQueue; // Path.curr is the vertex we're looking for
+    // std::vector<int> vertexQueue; //
+
+    visited.insert(from);
+    pathQueue.push_back(Path(from));
+
+    while(!pathQueue.empty()){
+        Path frontPath = pathQueue[0];
+        if(frontPath.curr == to){
+            return frontPath.path;
+        }
+
+        std::vector<std::pair<int, int>> connected = theList[frontPath.curr];
+
+        for(int i = 0; i < connected.size(); i++){
+            int title = connected[i].first;
+            int tag = connected[i].second;
+
+            bool inVisited = visited.find(title) != visited.end();
+            if(!inVisited){
+                visited.insert(title);
+                Path current = Path(frontPath, title, tag);
+                pathQueue.push_back(current);
+            }
+
+        }
+        pathQueue.erase(pathQueue.begin());
+    }
+
+    return {};
 }
