@@ -43,34 +43,42 @@ std::vector<int> Graph::bfs(){
     std::set<int> visited;
     std::vector<int> vertexQueue;
 
+    while(visited.size() != theList.size()){
+        bool alreadyVisited = std::find(visited.begin(), visited.end(), iter->first) != visited.end();
 
-    vertexQueue.push_back(iter->first);
-    visited.insert(iter->first);
+        if(alreadyVisited)
+            continue;
+        vertexQueue.push_back(iter->first);
+        visited.insert(iter->first);
 
-    // TO DO: wrap in loop
-    while(!vertexQueue.empty()){
-        int front = vertexQueue[0];
-        vertices.push_back(front);
-        visited.insert(front);
+        // TO DO: wrap in loop
+        while(!vertexQueue.empty()){
+            int front = vertexQueue[0];
+            vertices.push_back(front);
+            visited.insert(front);
 
-        std::vector<std::pair<int, int>> connected = theList[front];
+            std::vector<std::pair<int, int>> connected = theList[front];
 
-        // goes through connected nodes and adds them to queue
-        for(int i = 0; i < connected.size(); i++){
-            int val = connected[i].first;
-            // std::cout << "VAL: " << val << std::endl;
+            // goes through connected nodes and adds them to queue
+            for(int i = 0; i < connected.size(); i++){
+                int val = connected[i].first;
+                // std::cout << "VAL: " << val << std::endl;
 
-            bool inQueue = std::find(vertexQueue.begin(), vertexQueue.end(), val) != vertexQueue.end();
-            bool inVisited = std::find(visited.begin(), visited.end(), val) != visited.end();
+                bool inQueue = std::find(vertexQueue.begin(), vertexQueue.end(), val) != vertexQueue.end();
+                bool inVisited = std::find(visited.begin(), visited.end(), val) != visited.end();
 
-            // std::cout << "IN QUEUE: " << inQueue << "\t IN VISITED: " << inVisited << std::endl;
-            if(!inVisited && !inQueue){ // if not in queue
-                vertexQueue.push_back(val);
+                // std::cout << "IN QUEUE: " << inQueue << "\t IN VISITED: " << inVisited << std::endl;
+                if(!inVisited && !inQueue){ // if not in queue
+                    vertexQueue.push_back(val);
+                }
             }
+            vertexQueue.erase(vertexQueue.begin());
+            // remove item from vertex front
         }
-        vertexQueue.erase(vertexQueue.begin());
-        // remove item from vertex front
+
+        iter++;
     }
+
     return vertices;
 }
 
@@ -81,7 +89,7 @@ void Graph::printBFS(){
     }
 }
 
-std::vector<int> Graph::listNodes() {
+std::vector<int> Graph::getNodes() {
     std::vector<int> nodes;
 
     auto iter = theList.begin();
@@ -93,7 +101,7 @@ std::vector<int> Graph::listNodes() {
 }
 
 void Graph::printNodes() {
-    std::vector<int> nodes = listNodes();
+    std::vector<int> nodes = getNodes();
     for(int i = 0; i < nodes.size(); i++){
         std::cout << nodes[i] << std::endl;
     }

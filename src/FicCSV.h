@@ -4,22 +4,38 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <ifstream>
+#include <fstream>
 #include <iostream>
+#include <map>
+
+#include "Graph.h"
 
 #ifndef AO3_TRAWLER_FICCSV_H
 #define AO3_TRAWLER_FICCSV_H
 
 
-class FicCSV {
+class FicCSV : private Graph{
 private:
-    std::string edgeListFile;
-    std::string tagKeyFile;
-    std::string ficKeyFile;
+    std::map<int, std::string> tags;
+    std::map<int, std::string> ficTitles;
+
 
 
 public:
+    FicCSV(std::string edgelist);
     FicCSV(std::string edgelist, std::string tagKey, std::string ficKey);
+
+    void addTagKey(std::string tagKey);
+    void addFicKey(std::string ficKey);
+
+    void printNodesOrig();
+
+    std::vector<std::string> translate(std::vector<int> nodes);
+    std::vector<std::string> getNodes();
+    void printNodes();
+
+    std::map<std::string, std::vector<std::pair<std::string, std::string>>> getAdjList();
+    void printAdjList();
 };
 
 

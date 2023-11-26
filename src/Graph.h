@@ -19,6 +19,8 @@ class Graph {
 private:
     int v; // number of vertexes
     int e; // number of edges
+
+protected:
     std::map<int, std::vector<std::pair<int, int>>> theList;
     //       work     connected works    id   tag
     std::map<int, int> outDegree;
@@ -32,7 +34,7 @@ public:
     std::vector<int> bfs();
     void printBFS();
 
-    std::vector<int> listNodes();
+    std::vector<int> getNodes();
     void printNodes();
 
     // TO DO: include way to find quickest route btwn two fics
