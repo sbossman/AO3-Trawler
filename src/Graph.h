@@ -32,6 +32,10 @@ public:
     std::vector<int> bfs();
     void printBFS();
 
+    std::vector<int> listNodes();
+    void printNodes();
+
+    // TO DO: include way to find quickest route btwn two fics
 };
 
 
