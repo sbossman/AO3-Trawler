@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+#include <limits>
 #include <vector>
 #include <regex>
 using namespace std;
@@ -190,9 +191,14 @@ int main() {
 		string inputLine;
 		pair<string, string> parsedInput;
 
-		cout << "How large would you like the reduced file to be?" << endl;
+		cout << "How large would you like the reduced file to be? Write 'MAX' if you want to process the whole file." << endl;
 		cin >> input;
-		inputSelection = stoi(input);
+		if (input == "MAX") {
+			inputSelection = INT_MAX;
+		}
+		else {
+			inputSelection = stoi(input);
+		}
 
 		if (inputFile.is_open()) {
 			while (true) {
