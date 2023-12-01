@@ -35,31 +35,23 @@ struct Path{
 };
 
 class Graph {
-private:
+protected:
     int v; // number of vertexes
     int e; // number of edges
-
-protected:
-    std::unordered_map<int, std::vector<std::pair<int, int>>> theList;
-    //       work     connected works    id   tag
-    std::unordered_map<int, int> outDegree;
     // the int contains the outdegree for a given id
 
 public:
     Graph();
+    virtual void insertEdge(int from, int to, int tag) = 0;
 
-    void insertEdge(int from, int to, int tag);
-
-    std::vector<int> bfs();
+    virtual std::vector<int> bfs() = 0;
     void printBFS();
 
-    std::vector<int> getNodes();
+    virtual std::vector<int> getNodes() = 0;
     void printNodes();
 
     // returns path between two points
-    std::vector<std::pair<int, int>> pathBtwnPoints1(int from, int to);
-
-    // TO DO: include way to find quickest route btwn two fics
+    virtual std::vector<std::pair<int, int>> pathBtwnPoints(int from, int to) = 0;
 };
 
 
