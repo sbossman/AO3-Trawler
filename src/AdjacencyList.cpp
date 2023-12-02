@@ -21,13 +21,6 @@ void AdjacencyList::insertEdge(int from, int to, int tag) {
         outDegree[from] = 0;
     }
 
-    // finds out if the edge already exists
-    auto inList = theList[from].begin();
-    for(; inList != theList[from].end(); inList++){
-        if(inList->first == to)
-            return;
-    }
-
     // inserts the edge into the map
     theList[from].push_back({to, tag});
     outDegree[from]++;
