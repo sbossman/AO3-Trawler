@@ -2,22 +2,8 @@
 *Summer's Notes to Herself*
 
 ## To Do
-1. Test on the massive file
-2. Do the first algorithm for connecting two nodes
-3. Make it doable with the ids
-2. Do the second algorithm for connecting two nodes
+????
 
-
-
-## BFS/Connecting Nodes
-- BFS for each searching mechanism
-- For more efficient, prioritizes works with HIGHER OUT DEGREES
-  - How do we order them by outdegree?
-  - Can't be a key in a map
-  - Would need to sort WHILE creating the graph, probably
-  - Somehow I feel like we need a minheap for this
-  - Ahahaha we'll work on this later
-- For less efficient, BFS and whoever gets put in queue first gets put in queue first
 
 ## Potential Improvements for Future
 - enabling parallel edges so we can see how connected two works are
@@ -27,6 +13,10 @@
 1. Modify graph creation to suit our needs
 2. CSV -> Graph Creation
 3. BFSing
+4. Test on the massive file
+2. Do the first algorithm for connecting two nodes
+3. Make it doable with the ids
+2. Do the second algorithm for connecting two nodes
 
 ## Creating the Graph
 `[first title],[second title],[associated tag]`

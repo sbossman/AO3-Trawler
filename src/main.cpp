@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include "Graph.h"
+#include "graphs/Graph.h"
 #include "FicCSV.h"
 
 int main() {

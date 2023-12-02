@@ -8,9 +8,9 @@
 #include <iostream>
 #include <map>
 
-#include "Graph.h"
-#include "AdjacencyList.h"
-#include "AdjacencyMatrix.h"
+#include "./graphs/Graph.h"
+#include "./graphs/AdjacencyList.h"
+#include "./graphs/AdjacencyMatrix.h"
 
 #ifndef AO3_TRAWLER_FICCSV_H
 #define AO3_TRAWLER_FICCSV_H
