@@ -1,6 +1,4 @@
 #include <iostream>
-#include <chrono>
-#include "graphs/Graph.h"
 #include "FicCSV.h"
 
 int main() {
@@ -11,19 +9,34 @@ int main() {
 
     FicCSV fics(path + edgelist);
     fics.addFicKey(path + titles);
-    std::cout << "FINISHED ADDING FIC KEY" << std::endl;
     fics.addTagKey(path + tags);
-    std::cout << "FINISHED ADDING TAG KEY" << std::endl;
 
-    std::vector<std::string> pathAndStuff = fics.createGraphThenPath("All the Young Dudes", "Deku? I think he's some pro...");
-    std::string alPath = pathAndStuff[0];
-    std::string amPath = pathAndStuff[1];
-    std::string duration = pathAndStuff[2];
-    std::string alMakeTime = pathAndStuff[3];
-    std::string amMakeTime = pathAndStuff[4];
-    std::string alPathTime = pathAndStuff[5];
-    std::string amPathime = pathAndStuff[6];
+    std::string from;
+    std::string to;
 
+    std::string frontEndPath = "./front-end/src/components/";
+    std::string infileName = "fictitles.txt";
+    std::string outfileName = "ficsinfo.txt";
 
+    std::ifstream infile(frontEndPath + infileName);
+    if(!infile.is_open()){
+        std::cout << "FILE NOT OPEN" << std::endl;
+    }
+    std::string contents;
+    getline(infile, contents);
+    int i = 0;
+    while(contents[i] != ',') {
+        from += contents[i];
+        i++;
+    }
+    i++;
+    while(i < contents.size()){
+        to += contents[i];
+        i++;
+    }
+    std::cout << from << std::endl;
+    std::cout << to << std::endl;
+
+    fics.writePathToFrontend(from, to, frontEndPath + outfileName);
     return 0;
 }

@@ -35,3 +35,14 @@ fics.doEverything("Fic 1", "Fic2");
 //         total time, pathing times, matrix times
 //         as vector of strings
 ```
+How it returns stuff:
+```
+//    std::vector<std::string> pathAndStuff = fics.createGraphThenPath(from, to);
+//    std::string alPath = pathAndStuff[0];
+//    std::string amPath = pathAndStuff[1];
+//    std::string duration = pathAndStuff[2];
+//    std::string alMakeTime = pathAndStuff[3];
+//    std::string amMakeTime = pathAndStuff[4];
+//    std::string alPathTime = pathAndStuff[5];
+//    std::string amPathime = pathAndStuff[6];
+```
