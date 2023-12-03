@@ -1,5 +1,7 @@
 import React, { useState} from "react";
 import Select, {createFilter} from 'react-select';
+import "../App.css";
+
 
 const GraphGenerator = () => {
     const FicTitles = [
@@ -17256,24 +17258,34 @@ const GraphGenerator = () => {
         };    
 
     return <div>
-    <p>Fic 1</p>
-    <Select options = {FicTitles}
-    onChange={opt=> setRandomTitle(opt.label)}
-    filterOption={createFilter({ ignoreAccents: false })}/>
-    <p>Fic2</p>
-    <Select options = {FicTitles}
-    onChange={opt=> setRandomTitle2(opt.label)}
-    filterOption={createFilter({ ignoreAccents: false })}/>
-    <p>Or choose to randomly generate two titles!</p>
-    <button onClick={()=>{
-            Click();
-        }}>
+        <div className="listoptions1">
+            <p align="center">Fic 1</p>
+            <Select 
+            options = {FicTitles}
+            onChange={opt=> setRandomTitle(opt.label)}
+            filterOption={createFilter({ ignoreAccents: false })}/>
+        </div>
+        <div className="listoptions2">
+            <p align="center">Fic 2</p>
+            <Select options = {FicTitles}
+            onChange={opt=> setRandomTitle2(opt.label)}
+            filterOption={createFilter({ ignoreAccents: false })}/>
+        </div>
+        
+        <p align="center">Or choose to randomly generate two titles!</p>
+        <button onClick={()=>{
+                Click();
+                }}>
             Generate random Fics🎲
-    </button>
-    <p>Fic 1: {randomTitle}</p>
-    <p>Fic 2: {randomTitle2}</p>
-    
-
+        </button>
+        <div className="listoptions1">
+            <p align="center">Fic 1: {randomTitle}</p>
+        </div>
+        <div className="listoptions2">
+            <p align="center">Fic 2: {randomTitle2}</p>
+        </div>
+        
+        
     </div>
 };
 
