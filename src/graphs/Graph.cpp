@@ -22,3 +22,7 @@ void Graph::printNodes() {
         std::cout << nodes[i] << std::endl;
     }
 }
+
+int Graph::getNumVertices(){
+    return v;
+}

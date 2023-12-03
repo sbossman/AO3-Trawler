@@ -5,6 +5,7 @@
 #include "AdjacencyMatrix.h"
 
 AdjacencyMatrix::AdjacencyMatrix(int vertices) {
+    v = vertices;
     for(int i = 0; i < vertices; i++){
         std::vector<int> temp;
         for(int j = 0; j < vertices; j++)
@@ -14,8 +15,10 @@ AdjacencyMatrix::AdjacencyMatrix(int vertices) {
 }
 
 void AdjacencyMatrix::insertEdge(int from, int to, int tag) {
-    if(matrix[from][to] == -1)
+    if(matrix[from][to] == -1) {
         matrix[from][to] = tag;
+        e++;
+    }
 }
 
 std::vector<int> AdjacencyMatrix::bfs() {
