@@ -52,6 +52,8 @@ public:
 
     // returns path between two points
     virtual std::vector<std::pair<int, int>> pathBtwnPoints(int from, int to) = 0;
+
+    int getNumVertices();
 };
 
 

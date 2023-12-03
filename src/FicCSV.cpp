@@ -200,3 +200,58 @@ void FicCSV::printPath(std::string from, std::string to, Graph& graph){
         std::cout << path[i].second << " --> " << path[i].first << std::endl;
     }
 }
+
+std::vector<std::string> FicCSV::createGraphThenPath(std::string from, std::string to){
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    // ADJACENCY LIST //
+    // Creation
+    AdjacencyList adjList;
+    insertEdges(adjList);
+    auto adjListMadeTime = std::chrono::high_resolution_clock::now();
+
+    // pathing
+    auto adjListPath = pathBtwnPoints(from, to, adjList);
+    std::string adjListPathStr = from;
+    for(int i = 0; i < adjListPath.size(); i++){
+        adjListPathStr += " -> " + adjListPath[i].second + " -> " + adjListPath[i].first;
+    }
+    std::cout << "Pathed (AL)" << std::endl;
+    auto adjListPathTime = std::chrono::high_resolution_clock::now();
+
+
+    // ADJACENCY MATRIX
+    AdjacencyMatrix adjMatrix = AdjacencyMatrix(8636);
+    std::cout << "Matrix empty but made" << std::endl;
+    insertEdges(adjMatrix);
+    std::cout << "Inserted all edges in  AdjMatrix" << std::endl;
+    auto adjMatrixMadeTime = std::chrono::high_resolution_clock::now();
+    auto adjMatrixPath = pathBtwnPoints(from, to, adjMatrix);
+    std::string adjMatrixPathStr = from;
+    for(int i = 0; i < adjMatrixPath.size(); i++){
+        adjMatrixPathStr += " -> " + adjMatrixPath[i].second + " -> " + adjMatrixPath[i].first;
+    }
+    std::cout << "Pathed (AM)" << std::endl;
+    auto adjMatrixPathTime = std::chrono::high_resolution_clock::now();
+
+    // TIMING
+    int duration = (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - startTime)).count();
+
+    int alMakeTime = (std::chrono::duration_cast<std::chrono::seconds>(adjListMadeTime - startTime)).count();
+    int alPathTime = (std::chrono::duration_cast<std::chrono::seconds>(adjListPathTime - adjListMadeTime)).count();
+    int amMakeTime = (std::chrono::duration_cast<std::chrono::seconds>(adjMatrixMadeTime - adjListPathTime)).count();
+    int amPathTime = (std::chrono::duration_cast<std::chrono::seconds>(adjMatrixPathTime - adjMatrixMadeTime)).count();
+    // returns Adjacency matrix path, adjacency list path
+    //         total time, pathing times, matrix times
+    //         as vector of strings
+    std::cout << "Returning vector" << std::endl;
+    std::vector<std::string> returnVector;
+    returnVector.push_back(adjListPathStr);
+    returnVector.push_back(adjMatrixPathStr);
+    returnVector.push_back(std::to_string(duration));
+    returnVector.push_back(std::to_string(alMakeTime));
+    returnVector.push_back(std::to_string(amMakeTime));
+    returnVector.push_back(std::to_string(alPathTime));
+    returnVector.push_back(std::to_string(amPathTime));
+    return returnVector;
+}

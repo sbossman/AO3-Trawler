@@ -27,3 +27,11 @@ Parameters for inserting edge:
 1. Fic id (TO)
 2. Fic id (FROM)
 3. Tag id
+
+```
+FicCSV fics("Edgelist.csv", "IntToTagTranslator.csv", "IntToTitleTranslator.csv");
+fics.doEverything("Fic 1", "Fic2");
+// returns Adjacency matrix path, adjacency list path
+//         total time, pathing times, matrix times
+//         as vector of strings
+```

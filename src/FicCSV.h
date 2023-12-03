@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <chrono>
 
 #include "./graphs/Graph.h"
 #include "./graphs/AdjacencyList.h"
@@ -39,6 +40,9 @@ public:
 
     std::vector<std::pair<std::string, std::string>> pathBtwnPoints(std::string from, std::string to, Graph& graph);
     void printPath(std::string from, std::string to, Graph& graph);
+
+
+    std::vector<std::string> createGraphThenPath(std::string from, std::string to);
 };
 
 
