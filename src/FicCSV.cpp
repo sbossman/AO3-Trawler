@@ -5,7 +5,16 @@
 #include "FicCSV.h"
 
 FicCSV::FicCSV(std::string edgelist) {
+    this->edgelist = edgelist;
+}
 
+FicCSV::FicCSV(std::string edgelist, std::string tagKey, std::string ficKey) {
+    this->edgelist = edgelist;
+    addTagKey(tagKey);
+    addFicKey(ficKey);
+}
+
+void FicCSV::insertEdges(Graph &graph) {
     std::ifstream edgeListFile(edgelist);
     if (!edgeListFile.is_open()) {
         std::cout << "FILE NOT OPEN" << std::endl;
@@ -31,7 +40,7 @@ FicCSV::FicCSV(std::string edgelist) {
         int to = stoi(row[1]);
         int tag = stoi(row[2]);
 
-        Graph::insertEdge(from, to, tag);
+        graph.insertEdge(from, to, tag);
     }
 }
 
@@ -93,9 +102,6 @@ void FicCSV::addTagKey(std::string tagKey) {
     }
 }
 
-void FicCSV::printNodesOrig() {
-    Graph::printNodes();
-}
 
 std::vector<std::string> FicCSV::translate(std::vector<int> nodes){
     std::vector<std::string> ficList;
@@ -110,21 +116,22 @@ std::vector<std::string> FicCSV::translate(std::vector<int> nodes){
     return ficList;
 }
 
-std::vector<std::string> FicCSV::getNodes() {
-    return translate(Graph::getNodes());
+std::vector<std::string> FicCSV::getNodes(Graph& graph) {
+    return translate(graph.getNodes());
 }
 
-void FicCSV::printNodes() {
-    std::vector<std::string> ficList = getNodes();
+void FicCSV::printNodes(Graph& graph) {
+    std::vector<std::string> ficList = getNodes(graph);
     for(int i = 0; i < ficList.size(); i++){
         std::cout << ficList[i] << std::endl;
     }
 }
 
+/*
 std::map<std::string, std::vector<std::pair<std::string, std::string>>> FicCSV::getAdjList(){
     std::map<std::string, std::vector<std::pair<std::string, std::string>>> adjList;
-    auto iter = Graph::theList.begin();
-    for(; iter != Graph::theList.end(); iter++){
+    auto iter = graph.theList.begin();
+    for(; iter != graph.theList.end(); iter++){
         std::string key = ficTitles[iter->first];
         std::vector<std::pair<std::string, std::string>> values;
         for(int i = 0; i < iter->second.size(); i++){
@@ -138,7 +145,9 @@ std::map<std::string, std::vector<std::pair<std::string, std::string>>> FicCSV::
     }
     return adjList;
 }
+ */
 
+/*
 void FicCSV::printAdjList() {
     std::map<std::string, std::vector<std::pair<std::string, std::string>>> adjList = getAdjList();
     auto iter = adjList.begin();
@@ -151,8 +160,9 @@ void FicCSV::printAdjList() {
         }
     }
 }
+ */
 
-std::vector<std::pair<std::string, std::string>> FicCSV::pathBtwnPoints1(std::string from, std::string to){
+std::vector<std::pair<std::string, std::string>> FicCSV::pathBtwnPoints(std::string from, std::string to, Graph& graph){
     int fromId = -1;
     int toId = -1;
 
@@ -172,7 +182,7 @@ std::vector<std::pair<std::string, std::string>> FicCSV::pathBtwnPoints1(std::st
         return {};
     }
 
-    auto pathIds = Graph::pathBtwnPoints1(fromId, toId);
+    auto pathIds = graph.pathBtwnPoints(fromId, toId);
     std::vector<std::pair<std::string, std::string>> path = {};
     for(int i = 0; i < pathIds.size(); i++){
         std::pair<int, int> curr = pathIds[i];
@@ -183,8 +193,9 @@ std::vector<std::pair<std::string, std::string>> FicCSV::pathBtwnPoints1(std::st
     return path;
 
 }
-void FicCSV::printPath(std::string from, std::string to){
-    auto path = pathBtwnPoints1(from, to);
+void FicCSV::printPath(std::string from, std::string to, Graph& graph){
+    auto path = pathBtwnPoints(from, to, graph);
+    std::cout << from << std::endl;
     for(int i = 0; i < path.size(); i++){
         std::cout << path[i].second << " --> " << path[i].first << std::endl;
     }
