@@ -17,3 +17,5 @@ build-clean:
 	g++ -o ./build/dataCleaner.exe ./src/data_cleaner.cpp
 run-clean:
 	./build/dataCleaner.exe
+build-for-front-end:
+	g++ -o ./front-end/node-stuff/ao3Trawler.exe ./src/main.cpp ./src/FicCSV.cpp ./src/graphs/*.cpp
