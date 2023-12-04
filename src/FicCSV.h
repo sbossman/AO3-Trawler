@@ -43,6 +43,8 @@ public:
 
 
     std::vector<std::string> createGraphThenPath(std::string from, std::string to);
+
+    void writePathToFrontend(std::string from, std::string to, std::string filePath);
 };
 
 

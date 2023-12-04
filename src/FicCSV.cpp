@@ -127,41 +127,6 @@ void FicCSV::printNodes(Graph& graph) {
     }
 }
 
-/*
-std::map<std::string, std::vector<std::pair<std::string, std::string>>> FicCSV::getAdjList(){
-    std::map<std::string, std::vector<std::pair<std::string, std::string>>> adjList;
-    auto iter = graph.theList.begin();
-    for(; iter != graph.theList.end(); iter++){
-        std::string key = ficTitles[iter->first];
-        std::vector<std::pair<std::string, std::string>> values;
-        for(int i = 0; i < iter->second.size(); i++){
-            std::pair<int, int> curr = iter->second[i];
-            std::string to = ficTitles[curr.first];
-            std::string tag = tags[curr.second];
-            std::pair<std::string, std::string> p = {to, tag};
-            values.push_back(p);
-        }
-        adjList[key] = values;
-    }
-    return adjList;
-}
- */
-
-/*
-void FicCSV::printAdjList() {
-    std::map<std::string, std::vector<std::pair<std::string, std::string>>> adjList = getAdjList();
-    auto iter = adjList.begin();
-    for(; iter != adjList.end(); iter++){
-        std::cout << iter->first << std::endl;
-        std::vector<std::pair<std::string, std::string>> values = iter->second;
-        for(int i = 0; i < iter->second.size(); i++){
-            std::pair<std::string, std::string> curr = values[i];
-            std::cout << "\t" << curr.second << ": " << curr.first << std::endl;
-        }
-    }
-}
- */
-
 std::vector<std::pair<std::string, std::string>> FicCSV::pathBtwnPoints(std::string from, std::string to, Graph& graph){
     int fromId = -1;
     int toId = -1;
@@ -254,4 +219,18 @@ std::vector<std::string> FicCSV::createGraphThenPath(std::string from, std::stri
     returnVector.push_back(std::to_string(alPathTime));
     returnVector.push_back(std::to_string(amPathTime));
     return returnVector;
+}
+
+void FicCSV::writePathToFrontend(std::string from, std::string to, std::string filePath){
+    std::vector<std::string> info = createGraphThenPath(from, to);
+
+    std::ofstream file(filePath);
+    file << info[0];
+    for(int i = 0; i < info.size(); i++){
+        std::string line = info[i];
+        for(int j = 0; j < line.size(); j++){
+            file << line[j];
+        }
+        file << ",";
+    }
 }
