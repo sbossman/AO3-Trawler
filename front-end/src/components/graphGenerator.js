@@ -1,6 +1,7 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import Select, {createFilter} from 'react-select';
 import "../App.css";
+import axios from "axios";
 
 
 const GraphGenerator = () => {
@@ -17255,7 +17256,29 @@ const GraphGenerator = () => {
                 );
             setRandomTitle(FicTitles[Math.floor(Math.random() * FicTitles.length)])
             setRandomTitle2(FicTitles[Math.floor(Math.random() * FicTitles.length)])
-        };    
+        };
+    
+    //reads from back end
+    /*useEffect(()=>{
+        fetch("http://localhost:8001/ficnames")
+        .then(res=> res.json())
+        .then(backdata=>setbackdata(backdata.fic1))
+    }, [])*/
+
+
+    //sends to backennd
+    const sendBack= () =>{
+        var bodyy  = JSON.stringify({randomTitle}).slice(16,JSON.stringify({randomTitle}).length-2);
+        bodyy += ",";
+        var body2 = JSON.stringify({randomTitle2}).slice(17,JSON.stringify({randomTitle2}).length-2);
+        bodyy += body2;
+        axios.post('http://localhost:8001/ficnames',bodyy )
+        .then(()=>console.log('info sent'))
+        .catch(err => {
+            console.error(err);
+          });
+    };
+    
 
     return <div>
         <div className="listoptions1">
@@ -17284,6 +17307,11 @@ const GraphGenerator = () => {
         <div className="listoptions2">
             <p align="center">Fic 2: {randomTitle2}</p>
         </div>
+        <button onClick={()=>{
+                sendBack();
+                }}>
+            write file with values
+        </button>
         
         
     </div>
