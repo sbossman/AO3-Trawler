@@ -32,7 +32,8 @@ app.post('/ficnames', (req, res) => {
         return console.log(err);
     }
     console.log("file written :D!");
-    exec("ao3Trawler.exe", (error, stdout, stderr) => console.log(stdout));
+    exec('ao3Trawler.exe', (error, stdout, stderr) => console.log(stdout));
+    
      
 }); 
   });
