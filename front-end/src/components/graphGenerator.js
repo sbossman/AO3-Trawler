@@ -27,16 +27,36 @@ const GraphGenerator = () => {
     var alpath;
     var ampath;
     var duration;
-    var alMakeTimel;
-    var amMakeTime;
-    var alPathTime;
-    var amPathTime;
+    var almaketime;
+    var ammaketime;
+    var alpathtime;
+    var ampathtime;
+    const cleangraphinfo= ()=>{
+        var string_result="";
+        let grapharray = [];
+        for(let i=0; i <rawgraph.length; i++){
+            if(rawgraph[i]== ","){
+                grapharray.push(string_result);
+                string_result = "";
+            }else{
+                string_result += rawgraph[i];
+            }  
+        }
+        alpath = grapharray[0];
+        ampath= grapharray[1];
+        duration =grapharray[2];
+        almaketime = grapharray[3];
+        ammaketime =grapharray[4];
+        alpathtime=grapharray[5];
+        ampathtime=grapharray[6];   
+    };
     const Modal = () => {
         const [open, setOpen] = useState(false);
         const closeModal = () => setOpen(false);
         return (
           <div>
-            <button type="button" className="button" onClick={() => {setOpen(o => !o)}}>
+            <button type="button" className="button" onClick={() => {setOpen(o => !o); readpath();
+            }}>
               Show Graph information!
             </button>
             <Popup open={open} closeOnDocumentClick onClose={closeModal}>
@@ -44,7 +64,13 @@ const GraphGenerator = () => {
                 <a className="close" onClick={closeModal}>
                   &times;
                 </a>
-                {graphinfo}
+                    <p>{alpath}</p>
+                    <p>{ampath}</p>
+                    <p>{duration}</p>
+                    <p>{almaketime}</p>
+                    <p>{ammaketime}</p>
+                    <p>{alpathtime}</p>
+                    <p>{ampathtime}</p>
               </div>
             </Popup>
           </div>
@@ -1058,8 +1084,8 @@ const GraphGenerator = () => {
             "no stability (without solidarity)",
             "How Did I let Things Get this Bad",
             "butterfly in the subway",
-            "Center of Balance",
-            "I (created from fantasies) exist solely for you",
+            "Center of Balance",   
+"I (created from fantasies) exist solely for you",
             "Home Again From Far-Off Places",
             "To Be Modified As Necessary",
             "365 - Izuku on the Rise",
@@ -10153,12 +10179,10 @@ const GraphGenerator = () => {
             "Mind Defibrillator",
             "Reaping Justice",
             "When the World Screams",
-  
-                );
+        );
         setRandomTitle(FictTitle[Math.floor(Math.random() * FicTitles.length)])
         setRandomTitle2(FictTitle[Math.floor(Math.random() * FicTitles.length)])
-   
-    };
+    }
     const FicTitles = [
         { label: "Hero Class Civil Warfare" },
         { label: "Salvage" },
@@ -20268,6 +20292,7 @@ const GraphGenerator = () => {
             .then(text=>{
                 setgraphinfo(text);
             });
+        cleangraphinfo();
     };
     const delay = async (ms) => { 
         return new Promise((resolve) =>  
@@ -20285,9 +20310,8 @@ const GraphGenerator = () => {
             console.error(err);
         });
         setshow(false);
-        imghandler();
-        await delay(12000);
-        readpath();
+        setimg(true);
+        await delay(180000);
         setimg(false);
         setshow(true);
     };
