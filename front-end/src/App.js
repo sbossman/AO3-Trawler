@@ -9,9 +9,9 @@ function App() {
         <h1>🦈AO3-TRAWLER🦈</h1>
       </header>
       <div className="box">
-        <p>Welcome to AO3 TRAWLER!</p>
-        <p>Choose your 2 Fanction works from the lists below.</p>
-        <p></p> 
+        <h2>Welcome to AO3 TRAWLER!</h2>
+        <p>Choose 2 Fanction works from the lists below.</p>
+        <p> and check out the existing connections between them!</p> 
         <GraphGenerator/>
       </div>
     </div>

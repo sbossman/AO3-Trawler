@@ -17,8 +17,8 @@
   color: white;
 }
 .box {
-  width: 1000px;
-  height: 50%;
+  width: 1100px;
+  height: 67%;
   border: 10px groove #0293cc;
   border-radius: 25px;
   background-color: white;
@@ -37,37 +37,70 @@ p{
 button{
   color: #1b007a;
   font-size: 25px;
-  margin-left: 333px;
-  margin-bottom: 25px;
+  border-radius: 25px;
+  padding: 10px;
+  border: 4px solid #18025c;
+  margin: auto;
+
 
 }
 
 .listoptions1{
-  float: left;
   width: 475px;
-  margin-right: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 10px groove #0293cc;
+  border-radius: 25px;
+
 }
 
 .listoptions2{
-  float: right;
   width: 475px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 10px groove #0279a8;
+  border-radius: 25px;
   
+}
+td{
+  width: 400px;
+  align-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
+}
+table{
+  margin: auto;
 }
 
 h1{
   font-size: 100px;
 }
+h2{
+  font-size: 40px;
+  align-self: center;
+}
+h3{
+  font-size: 30px;
+  align-self: center;
+}
 Select{
   width:20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+img{
+  align-self: center;
+  border-radius: 25px;
+  margin-bottom: 15px;
+}
+
+.modal {  
+  font-size: 50px;
+  text-align: center;
+  width: 1200px;
+  justify-content: center;
+  background-color: aliceblue;
+  border: 10px groove #0293cc;
+  color:black;
+
 }

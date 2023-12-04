@@ -186,7 +186,7 @@ std::vector<std::string> FicCSV::createGraphThenPath(std::string from, std::stri
 
 
     // ADJACENCY MATRIX
-    AdjacencyMatrix adjMatrix = AdjacencyMatrix(8636);
+    AdjacencyMatrix adjMatrix = AdjacencyMatrix(10136);
     std::cout << "Matrix empty but made" << std::endl;
     insertEdges(adjMatrix);
     std::cout << "Inserted all edges in  AdjMatrix" << std::endl;

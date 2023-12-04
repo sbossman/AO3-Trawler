@@ -2,7 +2,7 @@
 #include "FicCSV.h"
 
 int main() {
-    std::string path = "./data/";
+    std::string path = "../../data/";
     std::string edgelist = "ReducedEdgeList.csv";
     std::string tags = "IntToTagTranslator.csv";
     std::string titles = "IntToTitleTranslator.csv";
@@ -14,13 +14,13 @@ int main() {
     std::string from;
     std::string to;
 
-    std::string frontEndPath = "./front-end/src/components/";
+    std::string frontEndPath = "../src/components/";
     std::string infileName = "fictitles.txt";
     std::string outfileName = "ficsinfo.txt";
 
     std::ifstream infile(frontEndPath + infileName);
     if(!infile.is_open()){
-        std::cout << "FILE NOT OPEN" << std::endl;
+        std::cout << "FILE NOT OPEN(1)" << std::endl;
     }
     std::string contents;
     getline(infile, contents);
