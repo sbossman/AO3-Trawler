@@ -6,6 +6,9 @@
 
 FicCSV::FicCSV(std::string edgelist) {
     this->edgelist = edgelist;
+    std::ofstream file("../src/components/toggle.txt");
+    file<<"N";
+    file.close();
 }
 
 FicCSV::FicCSV(std::string edgelist, std::string tagKey, std::string ficKey) {
@@ -17,7 +20,7 @@ FicCSV::FicCSV(std::string edgelist, std::string tagKey, std::string ficKey) {
 void FicCSV::insertEdges(Graph &graph) {
     std::ifstream edgeListFile(edgelist);
     if (!edgeListFile.is_open()) {
-        std::cout << "FILE NOT OPEN" << std::endl;
+        std::cout << "FILE NOT OPEN(2)" << std::endl;
     }
 
     std::string line;
@@ -48,7 +51,7 @@ void FicCSV::addFicKey(std::string ficKey) {
     std::ifstream ficKeyFile(ficKey);
 
     if (!ficKeyFile.is_open())
-        std::cout << "FILE NOT OPEN" << std::endl;
+        std::cout << "FILE NOT OPEN(3)" << std::endl;
 
     std::string line;
     std::string word;
@@ -77,7 +80,7 @@ void FicCSV::addTagKey(std::string tagKey) {
     std::ifstream tagKeyFile(tagKey);
 
     if (!tagKeyFile.is_open())
-        std::cout << "FILE NOT OPEN" << std::endl;
+        std::cout << "FILE NOT OPEN(4)" << std::endl;
 
     std::string line;
     std::string word;
@@ -186,7 +189,7 @@ std::vector<std::string> FicCSV::createGraphThenPath(std::string from, std::stri
 
 
     // ADJACENCY MATRIX
-    AdjacencyMatrix adjMatrix = AdjacencyMatrix(10136);
+    AdjacencyMatrix adjMatrix = AdjacencyMatrix(ficTitles.size() + 1);
     std::cout << "Matrix empty but made" << std::endl;
     insertEdges(adjMatrix);
     std::cout << "Inserted all edges in  AdjMatrix" << std::endl;
@@ -224,8 +227,21 @@ std::vector<std::string> FicCSV::createGraphThenPath(std::string from, std::stri
 void FicCSV::writePathToFrontend(std::string from, std::string to, std::string filePath){
     std::vector<std::string> info = createGraphThenPath(from, to);
 
+    if(info[0] == from){
+        info[0] = "NOT CONNECTED, NO PATH FOUND";
+        info[1] = "NOT CONNECTED, NO PATH FOUND";
+    }
+    // OUTPUT FILE PRETTY
+    info[0] = "Adjacency List Path: " + info[0];
+    info[1] = "Adjacency Matrix Path: " + info[1];
+    info[2] = "Total Duration: " + info[2]+" seconds";
+    info[3] = "Adjacency List Creation Time: " + info[3]+" seconds";
+    info[4] = "Adjacency Matrix Creation Time: " + info[4]+" seconds";
+    info[5] = "Adjacency List Path Time: " + info[5]+" seconds";
+    info[6] = "Adjacency Matrix Path Time: " + info[6]+" seconds";
+    
+
     std::ofstream file(filePath);
-    file << info[0];
     for(int i = 0; i < info.size(); i++){
         std::string line = info[i];
         for(int j = 0; j < line.size(); j++){
@@ -233,4 +249,9 @@ void FicCSV::writePathToFrontend(std::string from, std::string to, std::string f
         }
         file << ",";
     }
+    file.close();
+
+    std::ofstream file2("../src/components/toggle.txt");
+    file2<<"Y";
+    file2.close();
 }
