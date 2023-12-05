@@ -10177,7 +10177,7 @@ const GraphGenerator = () => {
         });
         setshow(false);
         setimg(true);
-        await delay(180000);
+        await delay(110000);
         setimg(false);
         setshow(true);
     };
