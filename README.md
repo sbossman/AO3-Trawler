@@ -22,7 +22,7 @@ If you wish to independently scrape for the fanfictions, view `sitemap.txt` (loc
 1. Pull the repository, using either the .zip download functionality or using the https link.
 2. Make sure you have the latest version of node.js installed.
 3. Navigate to the front-end folder within the repository and run "npm install" to get the necessary packages.
-4. run "mingw32-make build-for-front-end" to compile the correct .exe file for the functioning of the program.
+4. Go back to Ao3-Trawler main folder and run "mingw32-make build-for-front-end" to compile the correct .exe file for the functioning of the program.
 
 [Every Time]
 1. Navigate to "front-end/node-stuff" and run "node app.js"
