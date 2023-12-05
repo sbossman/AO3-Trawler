@@ -1,0 +1,2 @@
+build-for-front-end:
+    g++ -o ./front-end/node-stuff/ao3Trawler.exe ./src/main.cpp ./src/FicCSV.cpp ./src/graphs/*.cpp

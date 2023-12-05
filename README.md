@@ -16,3 +16,14 @@ If you wish to independently scrape for the fanfictions, view `sitemap.txt` (loc
 3. `ReducedEdgeList.csv` - this is the same as `Edgelist.csv` except with the parallel edges taken out.
 4. `IntToTitleTranslator.csv` - this CSV file has the IDs (ints) as the first value, and then the title they are associated with as the second number
 5. `IntToTagTranslator.csv` - this CSV file contains the IDs (ints) as the first value, and then the tag it is associated with as the second number.
+
+# HOW TO RUN!
+[First Time]
+1. Pull the repository, using either the .zip download functionality or using the https link.
+2. Make sure you have the latest version of node.js installed.
+3. Navigate to the front-end folder within the repository and run "npm install" to get the necessary packages.
+
+[Every Time]
+4. Navigate to "front-end/node-stuff" and run "node app.js"
+5. In a separate terminal, navigate to "front-end/src/components" and run "npm start"
+6. This will open the application. Enjoy!
