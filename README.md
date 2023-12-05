@@ -24,6 +24,6 @@ If you wish to independently scrape for the fanfictions, view `sitemap.txt` (loc
 3. Navigate to the front-end folder within the repository and run "npm install" to get the necessary packages.
 
 [Every Time]
-4. Navigate to "front-end/node-stuff" and run "node app.js"
-5. In a separate terminal, navigate to "front-end/src/components" and run "npm start"
-6. This will open the application. Enjoy!
+1. Navigate to "front-end/node-stuff" and run "node app.js"
+2. In a separate terminal, navigate to "front-end/src/components" and run "npm start"
+3. This will open the application. Enjoy!
